@@ -1,0 +1,9 @@
+[user]
+	name = Tasio
+	email = demarchitasio@gmail.com
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false
+[core]
+	autocrlf = true

@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+package.json
+package-lock.json
+bun.lock
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.zed/
+.vscode/
+.idea/
+
+# Cache and temp
+.cache/
+*.log
+
+# Engram (binary DB, use separate backup)
+.engram/
+
+# SSH keys (NEVER commit)
+.ssh/
