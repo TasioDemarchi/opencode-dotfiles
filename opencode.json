@@ -50,7 +50,7 @@
       "description": "A high-friction, Socratic mentor for Engineering growth. Uses Engram for persistent learning context and Obsidian Vault for structured knowledge artifacts.",
       "mode": "all",
       "model": "opencode-go/qwen3.6-plus",
-      "prompt": "{file:C:\\Users\\Slim-7\\.config\\opencode\\prompts\\agents\\engineering-sensei.md}",
+      "prompt": "{file:./prompts/agents/engineering-sensei.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -78,7 +78,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "opencode-go/deepseek-v4-pro",
-      "prompt": "{file:C:\\Users\\Slim-7\\.config\\opencode\\prompts\\sdd\\sdd-apply.md}",
+      "prompt": "{file:./prompts/sdd/sdd-apply.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -107,7 +107,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "opencode-go/qwen3.6-plus",
-      "prompt": "{file:C:\\Users\\Slim-7\\.config\\opencode\\prompts\\sdd\\sdd-archive.md}",
+      "prompt": "{file:./prompts/sdd/sdd-archive.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -136,7 +136,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "opencode-go/glm-5.1",
-      "prompt": "{file:C:\\Users\\Slim-7\\.config\\opencode\\prompts\\sdd\\sdd-design.md}",
+      "prompt": "{file:./prompts/sdd/sdd-design.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -165,7 +165,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "opencode-go/deepseek-v4-flash",
-      "prompt": "{file:C:\\Users\\Slim-7\\.config\\opencode\\prompts\\sdd\\sdd-explore.md}",
+      "prompt": "{file:./prompts/sdd/sdd-explore.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -194,7 +194,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "opencode-go/qwen3.5-plus",
-      "prompt": "{file:C:\\Users\\Slim-7\\.config\\opencode\\prompts\\sdd\\sdd-image.md}",
+      "prompt": "{file:./prompts/sdd/sdd-image.md}",
       "tools": {
         "bash": true,
         "glob": true,
@@ -212,7 +212,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "opencode-go/deepseek-v4-flash",
-      "prompt": "{file:C:\\Users\\Slim-7\\.config\\opencode\\prompts\\sdd\\sdd-init.md}",
+      "prompt": "{file:./prompts/sdd/sdd-init.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -240,7 +240,7 @@
       "description": "Guide user through a complete SDD cycle using their real codebase",
       "hidden": true,
       "mode": "subagent",
-      "prompt": "{file:C:\\Users\\Slim-7\\.config\\opencode\\prompts\\sdd\\sdd-onboard.md}",
+      "prompt": "{file:./prompts/sdd/sdd-onboard.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -316,7 +316,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "opencode-go/kimi-k2.6",
-      "prompt": "{file:C:\\Users\\Slim-7\\.config\\opencode\\prompts\\sdd\\sdd-propose.md}",
+      "prompt": "{file:./prompts/sdd/sdd-propose.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -345,7 +345,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "opencode-go/kimi-k2.6",
-      "prompt": "{file:C:\\Users\\Slim-7\\.config\\opencode\\prompts\\sdd\\sdd-spec.md}",
+      "prompt": "{file:./prompts/sdd/sdd-spec.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -374,7 +374,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "opencode-go/deepseek-v4-flash",
-      "prompt": "{file:C:\\Users\\Slim-7\\.config\\opencode\\prompts\\sdd\\sdd-tasks.md}",
+      "prompt": "{file:./prompts/sdd/sdd-tasks.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -403,7 +403,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "opencode-go/qwen3.6-plus",
-      "prompt": "{file:C:\\Users\\Slim-7\\.config\\opencode\\prompts\\sdd\\sdd-verify.md}",
+      "prompt": "{file:./prompts/sdd/sdd-verify.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -437,7 +437,7 @@
     },
     "engram": {
       "command": [
-        "C:\\Users\\Slim-7\\go\\bin\\engram.exe",
+        "engram",
         "mcp",
         "--tools=agent"
       ],
@@ -465,5 +465,5 @@
     }
   },
   "plugin": [],
-  "shell": "powershell"
+  "shell": "bash"
 }
