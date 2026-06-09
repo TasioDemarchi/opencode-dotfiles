@@ -241,7 +241,7 @@
       "description": "SDD Lite exploration agent. Investigates codebase topics \u2014 reads files, analyzes patterns, traces flows. Returns structured reports without implementing changes.",
       "hidden": true,
       "mode": "subagent",
-      "model": "opencode-go/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
       "prompt": "{file:./prompts/sdd-lite/sdd-lite-explore.md}",
       "tools": {
         "bash": true,
