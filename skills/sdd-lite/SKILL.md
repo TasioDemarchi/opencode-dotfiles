@@ -121,7 +121,7 @@ Most important step. Don't skip it.
 
 ## Step 2: Generate plan.md
 
-For medium and large changes, create `plan.md` in the project root (or `.opencode/` if it exists):
+For medium and large changes, create `docs/changes/{change-name}/plan.md` where `{change-name}` is a kebab-case identifier for this change (e.g., `add-auth-middleware`, `fix-login-flow`). Create the directory if it doesn't exist:
 
 ```markdown
 # Plan: {Title}
@@ -174,33 +174,40 @@ prompt: |
 ### Medium Changes → Plan + Apply
 
 ```
-1. Write plan.md (collaboratively with user)
+1. Write docs/changes/{change-name}/plan.md (collaboratively with user)
 2. delegate to: sdd-lite-apply
    prompt: |
      Project: {name}
-     Plan: {full plan.md content}
-     Implement ONLY what's described. Least Touch.
-     Return: status, summary, files, observations.
+     Change name: {change-name}
+     Plan file: docs/changes/{change-name}/plan.md
+     Intent: {1-2 sentences about what this change does}
+     Scope: {brief scope summary, 2-3 bullet points}
+     Read the full plan from disk. Implement ONLY what's described. Least Touch.
+     Return an executive summary: status, files changed, checklist status, observations. Do NOT paste full file contents.
 ```
 
 ### Large Changes → Plan + Design + Apply
 
 ```
-1. Write plan.md (collaboratively with user)
+1. Write docs/changes/{change-name}/plan.md (collaboratively with user)
 2. delegate to: sdd-lite-design
    prompt: |
      Project: {name}
-     Plan: {full plan.md content}
-     Create design.md per sdd-lite-design SKILL.md.
-     Return: status, summary, design content.
+     Change name: {change-name}
+     Plan file: docs/changes/{change-name}/plan.md
+     Read the plan from disk, then create design.md per sdd-lite-design SKILL.md.
+     Write design.md to docs/changes/{change-name}/design.md.
+     Return an executive summary: approach, key decisions, files to affect. Do NOT paste full design content.
 3. Review design.md with the user
 4. delegate to: sdd-lite-apply
    prompt: |
      Project: {name}
-     Plan: {full plan.md content}
-     Design: {full design.md content}
-     Implement ONLY what's described. Least Touch.
-     Return: status, summary, files, observations.
+     Change name: {change-name}
+     Plan file: docs/changes/{change-name}/plan.md
+     Design file: docs/changes/{change-name}/design.md
+     Intent: {1-2 sentences about what this change does}
+     Read both files from disk. Implement ONLY what's described. Least Touch.
+     Return an executive summary: status, files changed, checklist status, observations. Do NOT paste full file contents.
 ```
 
 ### Onboarding → Archaeology
@@ -234,7 +241,7 @@ After each sub-agent returns:
 
 1. **Review the results**. Read the files that were changed. Verify the Impact Checklist.
 
-2. **Present to the user**. In their language. Show what changed, what was implemented, what observations were noted.
+2. **Present to the user**. In their language. Provide an executive SUMMARY of what changed: decisions made, files affected, checklist status, and observations. Do NOT paste full file contents the user can open in their editor (plan.md, design.md, etc.). If the user wants details, they open the file.
 
 3. **Update project files**:
    - If architectural decisions were made, add them to `docs/decisions.md`
@@ -270,6 +277,11 @@ Push back from CARING, not arrogance. Speak in the user's language (Spanish for 
 5. **Skipping plan for medium/large changes**: "10 minutes of planning saves 2 hours of debugging."
 
 ## Project Artifacts
+
+SDD Lite uses permanent artifacts (commit to repo, live alongside the code) and per-change artifacts (scoped under `docs/changes/{change-name}/`):
+
+- **Permanent**: `PROJECT_CONTEXT.md` (root), `docs/decisions.md`, `CHANGELOG.md` (root)
+- **Per-change**: `docs/changes/{change-name}/plan.md` (medium+large), `docs/changes/{change-name}/design.md` (large only)
 
 ### docs/decisions.md — Architecture Decision Records
 

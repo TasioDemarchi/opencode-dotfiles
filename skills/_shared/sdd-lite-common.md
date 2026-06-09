@@ -30,11 +30,11 @@ SDD Lite uses TWO persistence layers:
 ### Filesystem (Primary)
 
 Write artifacts to the project directory:
-- `plan.md` → project root (or `.opencode/` if it exists)
-- `design.md` → project root (or `.opencode/` if it exists)
-- `PROJECT_CONTEXT.md`
-- `docs/decisions.md`
-- `CHANGELOG.md`
+- `docs/changes/{change-name}/plan.md` → per-change plan
+- `docs/changes/{change-name}/design.md` → per-change design (large changes only)
+- `PROJECT_CONTEXT.md` → project root (permanent)
+- `docs/decisions.md` → ADRs (permanent)
+- `CHANGELOG.md` → project root (permanent)
 
 ### Engram (Secondary)
 
@@ -72,7 +72,7 @@ mem_save(
 Every phase MUST return a structured envelope to the orchestrator:
 
 - `status`: `success`, `partial`, or `blocked`
-- `summary`: 1-3 sentence summary of what was done
+- `summary`: 1-3 sentence executive summary of what was done. An executive summary, NOT a reproduction of file contents. See Section G.
 - `files_changed`: list of files created or modified
 - `observations`: things noticed outside scope (Least Touch principle)
 - `next_recommended`: the next phase to run, or "none"
@@ -103,7 +103,19 @@ The orchestrator routes based on change size:
 | Size | Files | Flow | Artifacts |
 |------|-------|------|-----------|
 | Simple | 1-3 | Direct → sdd-lite-apply | Instructions in delegation prompt |
-| Medium | 4-10 | Plan → sdd-lite-apply | plan.md |
-| Large | 10+ | Plan → Design → sdd-lite-apply | plan.md + design.md |
+| Medium | 4-10 | Plan → sdd-lite-apply | docs/changes/{name}/plan.md |
+| Large | 10+ | Plan → Design → sdd-lite-apply | docs/changes/{name}/plan.md + design.md |
 | Explore | any | Investigate → sdd-lite-explore | Structured report (no files) |
 | Onboard | any | Archaeology → sdd-lite-onboard | PROJECT_CONTEXT.md, decisions.md, CHANGELOG.md |
+
+## G. Summarize, Don't Duplicate
+
+When an agent writes an artifact to disk, it MUST return a SUMMARY of key points to the orchestrator, NOT the full file contents. The user can open the file in their editor.
+
+For plan.md: Return intent, scope, affected files list, and impact checklist status.
+For design.md: Return approach, key decisions (D1, D2...), and files to create/modify.
+For PROJECT_CONTEXT.md: Return stack summary, architecture summary, and decision count.
+For decisions.md: Return the new ADRs added (title and one-liner each).
+For CHANGELOG.md: Return the version and entry summary.
+
+This rule exists because token waste on duplicating file contents helps NO ONE. The orchestrator presents summaries to the user. If the user wants details, they open the file.

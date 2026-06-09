@@ -109,7 +109,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Step 6: Return for Validation
 
-Return ALL three drafts to the orchestrator for user review:
+Return an executive SUMMARY of all three drafts to the orchestrator for user review. Do NOT paste full file contents — the user will open each file to review and validate.
+
+IMPORTANT — Summarize, Don't Duplicate: Return an executive summary of each draft (stack detected, # of ADRs inferred, key findings), NOT the full content of the files. The user will open each file to review and validate.
 
 ```markdown
 ## Onboarding: Archaeology Complete

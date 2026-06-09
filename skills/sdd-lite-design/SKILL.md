@@ -37,7 +37,7 @@ Before designing, read the ACTUAL code that will be affected:
 
 ### Step 2: Create design.md
 
-Write `design.md` in the project root (or `.opencode/` if it exists):
+Write `design.md` to `docs/changes/{change-name}/design.md` (create the `docs/changes/{change-name}/` directory if needed):
 
 ```markdown
 # Design: {Title}
@@ -104,7 +104,7 @@ If not applicable: "No migration required."}
 
 ### Step 3: Persist and Return
 
-Save design.md and return to the orchestrator:
+Save `design.md` to `docs/changes/{change-name}/design.md` and return to the orchestrator:
 
 ```markdown
 ## Design Created
@@ -125,6 +125,8 @@ Save design.md and return to the orchestrator:
 ### Next Step
 Ready for implementation (sdd-lite-apply).
 ```
+
+IMPORTANT — Summarize, Don't Duplicate: Return an executive summary of the design (approach, key decisions, files affected), NOT the full design.md content. The orchestrator and user can open the file directly. Save those tokens.
 
 ## Rules
 
