@@ -129,6 +129,9 @@ For medium and large changes, create `docs/changes/{change-name}/plan.md` where 
 ## Intent
 {One paragraph: what we're building and why.}
 
+## Why
+{Why this change exists — the problem, bug, or motivation. If this is a bugfix, what was broken. If a feature, what triggered it. 2-3 sentences max. Only needed if Intent doesn't already explain the motivation clearly.}
+
 ## Scope
 {What's included in this change. Be specific.}
 
@@ -142,7 +145,7 @@ For medium and large changes, create `docs/changes/{change-name}/plan.md` where 
 - [ ] {criteria 3 for "done"}
 
 ## Decisions
-{Any decisions made during scoping. Format: D1: Choice — Why}
+{Change-specific decisions. Format: D1: Choice — Why. These stay with this change — they do NOT go to docs/decisions.md unless they are architectural project decisions (see below).}
 
 ## Out of Scope
 - {explicitly listed things we're NOT doing}
@@ -244,7 +247,7 @@ After each sub-agent returns:
 2. **Present to the user**. In their language. Provide an executive SUMMARY of what changed: decisions made, files affected, checklist status, and observations. Do NOT paste full file contents the user can open in their editor (plan.md, design.md, etc.). If the user wants details, they open the file.
 
 3. **Update project files**:
-   - If architectural decisions were made, add them to `docs/decisions.md`
+   - If project-level architectural decisions were made, add them to `docs/decisions.md` (ONLY project decisions — change-specific decisions stay in plan.md)
    - If the change is complete, add an entry to `CHANGELOG.md`
    - Update `PROJECT_CONTEXT.md` with any changes to architecture
 
@@ -285,7 +288,20 @@ SDD Lite uses permanent artifacts (commit to repo, live alongside the code) and 
 
 ### docs/decisions.md — Architecture Decision Records
 
-Flat file format (not individual files). Each decision is an ADR:
+Flat file format (not individual files). **ONLY for project-level architectural decisions** — choices that affect the entire project, not a single change.
+
+What goes in decisions.md:
+- Stack choices (language, framework, state management pattern)
+- Architecture patterns (two-tier settings, fallback chain, module structure)
+- Cross-cutting concerns that span multiple changes
+
+What does NOT go in decisions.md (it goes in the change's plan.md):
+- Implementation details for a specific change (e.g., "use JSON for API keys")
+- Choice of approach for a single bugfix (e.g., "migrate keys one-shot")
+- UI layout decisions (e.g., "show warning banner for missing keys")
+- Anything scoped to one change — these go in `## Decisions` in the change's plan.md
+
+Rule of thumb: if a decision only matters during ONE change, it stays in plan.md. If it matters for FUTURE changes too, it goes in decisions.md.
 
 ```markdown
 # Architecture Decisions

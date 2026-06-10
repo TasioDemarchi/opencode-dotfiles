@@ -10,12 +10,14 @@ ALL SDD Lite agents MUST read project context before starting work:
 
 ```
 1. Read PROJECT_CONTEXT.md — project architecture and patterns
-2. Read docs/decisions.md — existing architectural decisions
+2. Read docs/decisions.md — PROJECT-LEVEL architectural decisions only (not change-specific)
 3. Read CHANGELOG.md — project history
 4. Check engram: mem_search(query: "sdd-lite", project: "{project}")
 ```
 
 If PROJECT_CONTEXT.md doesn't exist, proceed but note it. Suggest onboarding if needed.
+
+When reading docs/decisions.md, note that it ONLY contains project-level decisions (stack, architecture, cross-cutting patterns). Change-specific decisions live in each change's plan.md under `## Decisions`.
 
 ## B. Skill Loading
 
