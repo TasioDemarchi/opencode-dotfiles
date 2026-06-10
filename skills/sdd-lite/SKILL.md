@@ -238,20 +238,55 @@ prompt: |
   Return: summary, findings, key files, patterns, gotchas, observations.
 ```
 
-## Step 4: Review and Iterate
+## Step 4: Review and Verify
 
-After each sub-agent returns:
+After the apply agent returns, the orchestrator MUST verify the implementation before presenting to the user.
 
-1. **Review the results**. Read the files that were changed. Verify the Impact Checklist.
+### 4.1 Verify Implementation Against Plan
 
-2. **Present to the user**. In their language. Provide an executive SUMMARY of what changed: decisions made, files affected, checklist status, and observations. Do NOT paste full file contents the user can open in their editor (plan.md, design.md, etc.). If the user wants details, they open the file.
+Read each changed file and check:
 
-3. **Update project files**:
+1. **Impact Checklist**: For each item, verify it's actually implemented in the code. Mark [x] if verified, [?] if needs manual testing, [ ] if not done.
+
+2. **Decisions**: Check that each decision from the plan's `## Decisions` section was followed in the implementation.
+
+3. **Least Touch**: Check that NO files outside the plan's Affected Files were modified. If they were, flag them.
+
+4. **Obvious errors**: Look for syntax errors, logic errors that contradict the plan, missing imports, typos in variable names, incorrect function calls.
+
+### 4.2 If Issues Found: Re-Apply (Max 1 Retry)
+
+If verification finds issues:
+
+1. List the specific issues found (file, line, what's wrong, what the plan says vs what the code does)
+2. Delegate to sdd-lite-apply again with a focused prompt:
+   ```
+   delegate to: sdd-lite-apply
+   prompt: |
+     Project: {name}
+     Change name: {change-name}
+     Plan file: docs/changes/{change-name}/plan.md
+     Intent: Fix verification issues from initial implementation
+     Issues found:
+     - {file}: {what's wrong} (plan says {X}, code does {Y})
+     - {file}: {what's wrong}
+     Fix ONLY these issues. Least Touch.
+     Return: status, files changed, verification status.
+   ```
+3. After re-apply, verify AGAIN. If issues persist after 2 passes, STOP and present the issues to the user for manual review.
+
+**Maximum 1 re-apply per change.** If after 2 passes there are still issues, the problem is likely in the plan itself, not the implementation. Escalate to the user.
+
+### 4.3 If Verification Passes
+
+1. **Present to the user**. In their language. Provide an executive SUMMARY of what changed: decisions made, files affected, checklist status, and observations. Do NOT paste full file contents — the user can open them. If the user wants details, they open the file.
+
+2. **Update project files**:
    - If project-level architectural decisions were made, add them to `docs/decisions.md` (ONLY project decisions — change-specific decisions stay in plan.md)
    - If the change is complete, add an entry to `CHANGELOG.md`
    - Update `PROJECT_CONTEXT.md` with any changes to architecture
 
-4. **Save to engram**: `mem_save` for any significant decisions made during the session.
+3. **Save to engram**: `mem_save` for any significant decisions made during the session.
 
 ## Delegation Rules
 
