@@ -103,7 +103,7 @@
     "sdd-lite": {
       "description": "SDD Lite orchestrator \u2014 Argentine senior architect, collaborative, passionate. Coordinates SDD Lite workflow: Plan \u2192 Design \u2192 Build.",
       "mode": "primary",
-      "model": "opencode-go/minimax-m3",
+      "model": "minimax-coding-plan/MiniMax-M3",
       "prompt": "{file:./prompts/sdd-lite/sdd-lite.md}",
       "tools": {
         "bash": true,
@@ -183,7 +183,7 @@
       "description": "SDD Lite design agent. Creates design.md for large/architectural changes based on plan.md.",
       "hidden": true,
       "mode": "subagent",
-      "model": "opencode-go/minimax-m3",
+      "model": "minimax-coding-plan/MiniMax-M3",
       "prompt": "{file:./prompts/sdd-lite/sdd-lite-design.md}",
       "tools": {
         "bash": true,
